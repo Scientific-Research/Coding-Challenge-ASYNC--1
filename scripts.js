@@ -31,3 +31,13 @@ TEST COORDINATES 3: -33.933, 18.474
 GOOD LUCK 😀
 
 */
+
+const whereAmI = function (lat, lng) {
+  const response = fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`).then(
+    (data) => {
+      console.log(data);
+    }
+  );
+};
+
+whereAmI(52.508, 13.382);
