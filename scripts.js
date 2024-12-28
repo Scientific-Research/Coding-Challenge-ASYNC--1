@@ -35,7 +35,14 @@ GOOD LUCK 😀
 // 'You are in Berlin, Germany'
 const whereAmI = function (lat, lng) {
   const response = fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
-    .then((response) => response.json())
+    .then((response) => {
+      response.json();
+      if (!response.ok) {
+        throw new Error(
+          `You can only make 3 requests per second ${response.status}`
+        );
+      }
+    })
     .then((data) => {
       console.log(data);
       console.log(`You are in ${data.city}, ${data.country}`);
