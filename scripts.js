@@ -47,7 +47,9 @@ const whereAmI = function (lat, lng) {
       console.log(data);
       console.log(`You are in ${data.city}, ${data.country}`);
     })
-    .catch((err) => console.error(`ERROR: Something went Wrong ☠️☠️☠️ ${err.message}. Try again!`));
+    .catch((err) => console.error(`ERROR: Something went Wrong ☠️☠️☠️ ${err.message}. Try again!`)).finally(()=!{
+
+    })
 };
 
 whereAmI(52.508, 13.382);
