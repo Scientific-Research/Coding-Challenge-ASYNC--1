@@ -32,10 +32,14 @@ GOOD LUCK 😀
 
 */
 
+// 'You are in Berlin, Germany'
 const whereAmI = function (lat, lng) {
   const response = fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
     .then((response) => response.json())
-    .then((data) => console.log(data));
+    .then((data) => {
+      console.log(data);
+      console.log(`You are in ${data.city}, ${data.country}`);
+    });
 };
 
 whereAmI(52.508, 13.382);
