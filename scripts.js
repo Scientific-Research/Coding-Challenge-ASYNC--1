@@ -74,8 +74,10 @@ const whereAmI = function (lat, lng) {
     });
 };
 
-// whereAmI(52.508, 13.382);
-// whereAmI(19.037, 72.873);
+// NOTE: We can here use multiple APIs to get the amazing results for all three countries!
+// WE CAN JUST HERE GIVE THE COORDINATES(LATTITUDE AND LONGITIUDE) FOR EVRY COUNTRY AND THEN GET THE INFORMATION ABOUT EVERY COUNTRY!
+whereAmI(52.508, 13.382);
+whereAmI(19.037, 72.873);
 whereAmI(-33.933, 18.474);
 
 const renderCountry = (data, className = "") => {
