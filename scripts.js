@@ -50,7 +50,8 @@ const whereAmI = function (lat, lng) {
     })
     .then((data) => {
       console.log(data);
-      if (data.country === undefined) {
+      // if (data.country === undefined) {
+      if (!data.country) {
         throw new Error(`You can only make 3 requests per second!`);
       }
       console.log(`You are in ${data.city}, ${data.country}`);
