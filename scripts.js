@@ -62,7 +62,7 @@ const whereAmI = function (lat, lng) {
       return res.json(); // this returns a resolved promise as data in next then method!
     })
     .then((data) => {
-      return renderCountry(data[0]);
+      renderCountry(data[0]);
     })
     .catch((err) =>
       console.error(
