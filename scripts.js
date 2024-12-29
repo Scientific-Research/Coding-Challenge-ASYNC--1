@@ -40,13 +40,13 @@ const countriesContainer = document.querySelector(".countries");
 const whereAmI = function (lat, lng) {
   const response = fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
     .then((response) => {
-      response.json();
       console.log(response);
       if (!response.ok) {
         throw new Error(
           `You can only make 3 requests per second ${response.status}`
         );
       }
+      return response.json();
     })
     .then((data) => {
       console.log(data);
