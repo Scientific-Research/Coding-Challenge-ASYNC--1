@@ -58,7 +58,7 @@ const whereAmI = function (lat, lng) {
     })
     .catch((err) =>
       console.error(
-        `ERROR: Something went Wrong ☠️☠️☠️ ${err.message}. Try again later!`
+        `ERROR: Something went Wrong ☠️☠️☠️ ${err.message}.Try again later!`
       )
     )
     .finally(() => {
@@ -66,7 +66,7 @@ const whereAmI = function (lat, lng) {
     });
 };
 
-whereAmI(52.508, 13.382);
+whereAmI(-33.933, 18.474);
 
 const renderCountry = (data, className = "") => {
   const html = `<article class="country ${className}">
