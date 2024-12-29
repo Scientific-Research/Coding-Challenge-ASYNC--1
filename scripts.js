@@ -50,8 +50,11 @@ const whereAmI = function (lat, lng) {
     })
     .then((data) => {
       console.log(data);
+      if (data.country === undefined) {
+        throw new Error(`You can only make 3 requests per second!`);
+      }
       console.log(`You are in ${data.city}, ${data.country}`);
-      renderCountry(data.country);
+      renderCountry(data);
     })
     .catch((err) =>
       console.error(
@@ -67,19 +70,9 @@ whereAmI(52.508, 13.382);
 
 const renderCountry = (data, className = "") => {
   const html = `<article class="country ${className}">
-  <img class="country__img" src=${data.flags.png} />
   <div class="country__data">
-  <h3 class="country__name">${data.name.common}</h3>
-  <h4 class="country__region">${data.region}</h4>
-  <p class="country__row"><span>👫</span>${Number(
-    data.population / 1000000
-  ).toFixed(1)}M people
-  </p>
-  <p class="country__row"><span>🗣️</span>${Object.values(data.languages)[0]}</p>
-  <p class="country__row"><span>💰</span>${
-    Object.values(data.currencies)[0].name
-  }</p>
-  </div>
+  <h3 class="country__name">Country: ${data.country}</h3>
+  <h4 class="country__region">City: ${data.region}</h4>
   </article>`;
 
   // form.insertAdjacentHTML("afterend", html);
