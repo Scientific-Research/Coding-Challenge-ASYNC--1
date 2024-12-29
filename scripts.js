@@ -46,7 +46,7 @@ const whereAmI = function (lat, lng) {
           `You can only make 3 requests per second ${response.status}`
         );
       }
-      return response.json();
+      return response.json(); // this returns a resolved promise as data in next then method!
     })
     .then((data) => {
       console.log(data);
@@ -66,7 +66,7 @@ const whereAmI = function (lat, lng) {
     });
 };
 
-whereAmI(-33.933, 18.474);
+whereAmI(19.037, 72.873);
 
 const renderCountry = (data, className = "") => {
   const html = `<article class="country ${className}">
