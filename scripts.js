@@ -17,7 +17,7 @@ The AJAX call will be done to a URL with this format: https://geocode.xyz/52.508
 
 4. Chain a .catch method to the end of the promise chain and log errors to the console
 
-5. This API allows you to make only 3 requests per second. If you reload fast, you will get this error with code 403. This is an error with the request.  Remember, fetch() does NOT reject the promise in this case. So create an error to reject the pronise yourself, with a meaningful error message.
+5. This API allows you to make only 3 requests per second. If you reload fast, you will get this error with code 403. This is an error with the request.  Remember, fetch() does NOT reject the promise in this case. So create an error to reject the promise yourself, with a meaningful error message.
 
 PART 2
 6. Now, it's time to use the received data to render a country. So take the relevant attribute from the geocoding API result, and plug it into the countries API that we have been using.
@@ -37,6 +37,7 @@ const whereAmI = function (lat, lng) {
   const response = fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
     .then((response) => {
       response.json();
+      console.log(response);
       if (!response.ok) {
         throw new Error(
           `You can only make 3 requests per second ${response.status}`
@@ -46,6 +47,7 @@ const whereAmI = function (lat, lng) {
     .then((data) => {
       console.log(data);
       console.log(`You are in ${data.city}, ${data.country}`);
+      renderCountry(data.country);
     })
     .catch((err) =>
       console.error(
@@ -56,3 +58,29 @@ const whereAmI = function (lat, lng) {
 };
 
 whereAmI(52.508, 13.382);
+
+const renderCountry = (data, className = "") => {
+  const html = `<article class="country ${className}">
+  <img class="country__img" src=${data.flags.png} />
+  <div class="country__data">
+  <h3 class="country__name">${data.name.common}</h3>
+  <h4 class="country__region">${data.region}</h4>
+  <p class="country__row"><span>👫</span>${Number(
+    data.population / 1000000
+  ).toFixed(1)}M people
+  </p>
+  <p class="country__row"><span>🗣️</span>${Object.values(data.languages)[0]}</p>
+  <p class="country__row"><span>💰</span>${
+    Object.values(data.currencies)[0].name
+  }</p>
+  </div>
+  </article>`;
+
+  // form.insertAdjacentHTML("afterend", html);
+  // Here we have class countries as parent of our html here instead of form. We don't have form here!
+  countriesContainer.insertAdjacentHTML("beforeend", html);
+
+  // To meke it appear on the page, we have to change the opacity to 1:
+  // I added to finally and commented it out here, because anyway it has to be happen no matter of success for promise or a failed promise!
+  // countriesContainer.style.opacity = 1;
+};
