@@ -31,6 +31,10 @@ TEST COORDINATES 3: -33.933, 18.474
 GOOD LUCK 😀
 
 */
+"use strict";
+
+const btn = document.querySelector(".btn-country");
+const countriesContainer = document.querySelector(".countries");
 
 // 'You are in Berlin, Germany'
 const whereAmI = function (lat, lng) {
@@ -54,7 +58,9 @@ const whereAmI = function (lat, lng) {
         `ERROR: Something went Wrong ☠️☠️☠️ ${err.message}. Try again!`
       )
     )
-    .finally(() => {});
+    .finally(() => {
+      countriesContainer.style.opacity = 1;
+    });
 };
 
 whereAmI(52.508, 13.382);
