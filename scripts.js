@@ -66,7 +66,7 @@ const whereAmI = function (lat, lng) {
     });
 };
 
-whereAmI(19.037, 72.873);
+whereAmI(-33.933, 18.474);
 
 const renderCountry = (data, className = "") => {
   const html = `<article class="country ${className}">
