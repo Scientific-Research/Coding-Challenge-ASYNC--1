@@ -58,7 +58,7 @@ const whereAmI = function (lat, lng) {
     })
     .catch((err) =>
       console.error(
-        `ERROR: Something went Wrong ☠️☠️☠️ ${err.message}. Try again!`
+        `ERROR: Something went Wrong ☠️☠️☠️ ${err.message}. Try again later!`
       )
     )
     .finally(() => {
