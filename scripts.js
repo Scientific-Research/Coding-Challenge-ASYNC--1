@@ -53,7 +53,16 @@ const whereAmI = function (lat, lng) {
         throw new Error(`You can only make 3 requests per second!`);
       }
       console.log(`You are in ${data.city}, ${data.country}`);
-      renderCountry(data);
+      return fetch(`https://restcountries.com/v3.1/name/${data.country}`);
+    })
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error(`Country not found! ${res.status}`);
+      }
+      return res.json(); // this returns a resolved promise as data in next then method!
+    })
+    .then((data) => {
+      return renderCountry(data[0]);
     })
     .catch((err) =>
       console.error(
@@ -65,15 +74,25 @@ const whereAmI = function (lat, lng) {
     });
 };
 
-whereAmI(52.508, 13.382);
-whereAmI(19.037, 72.873);
+// whereAmI(52.508, 13.382);
+// whereAmI(19.037, 72.873);
 whereAmI(-33.933, 18.474);
 
 const renderCountry = (data, className = "") => {
   const html = `<article class="country ${className}">
+  <img class="country__img" src=${data.flags.png} />
   <div class="country__data">
-  <h3 class="country__name">Country: ${data.country}</h3>
-  <h4 class="country__region">City: ${data.region}</h4>
+  <h3 class="country__name">${data.name.common}</h3>
+  <h4 class="country__region">${data.region}</h4>
+  <p class="country__row"><span>👫</span>${Number(
+    data.population / 1000000
+  ).toFixed(1)}M people
+  </p>
+  <p class="country__row"><span>🗣️</span>${Object.values(data.languages)[0]}</p>
+  <p class="country__row"><span>💰</span>${
+    Object.values(data.currencies)[0].name
+  }</p>
+  </div>
   </article>`;
 
   // form.insertAdjacentHTML("afterend", html);
