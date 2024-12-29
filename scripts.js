@@ -42,9 +42,7 @@ const whereAmI = function (lat, lng) {
     .then((response) => {
       console.log(response);
       if (!response.ok) {
-        throw new Error(
-          `You can only make 3 requests per second ${response.status}`
-        );
+        throw new Error(`Problem with geocoding! ${response.status}`);
       }
       return response.json(); // this returns a resolved promise as data in next then method!
     })
@@ -59,7 +57,7 @@ const whereAmI = function (lat, lng) {
     })
     .catch((err) =>
       console.error(
-        `ERROR: Something went Wrong ☠️☠️☠️ ${err.message}.Try again later!`
+        `ERROR: Something went Wrong ☠️☠️☠️ ${err.message} Try again later!`
       )
     )
     .finally(() => {
